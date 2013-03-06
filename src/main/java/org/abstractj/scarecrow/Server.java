@@ -1,19 +1,16 @@
 package org.abstractj.scarecrow;
 
+import org.jboss.aerogear.security.model.AeroGearUser;
 import org.vertx.java.core.Handler;
 import org.vertx.java.core.buffer.Buffer;
-import org.vertx.java.core.http.HttpServer;
 import org.vertx.java.core.http.HttpServerRequest;
 import org.vertx.java.core.http.RouteMatcher;
-import org.vertx.java.core.json.JsonObject;
-import org.vertx.java.core.sockjs.SockJSServer;
-import org.vertx.java.core.sockjs.SockJSSocket;
+import org.vertx.java.core.json.impl.Json;
 import org.vertx.java.deploy.Verticle;
 
 public class Server extends Verticle {
 
     public void start() {
-
 
         RouteMatcher rm = new RouteMatcher();
 
@@ -27,7 +24,8 @@ public class Server extends Verticle {
             public void handle(final HttpServerRequest req) {
                 req.dataHandler(new Handler<Buffer>() {
                     public void handle(Buffer buffer) {
-                        req.response.end(buffer);
+                        AeroGearUser user = (AeroGearUser) Json.decodeValue(buffer.toString(), AeroGearUser.class);
+                        req.response.end(user.getUsername());
                     }
                 });
             }
@@ -53,6 +51,6 @@ public class Server extends Verticle {
                 req.response.sendFile("webapp/" + file);
             }
         }).requestHandler(rm).listen(8080);
-    }
 
+    }
 }
