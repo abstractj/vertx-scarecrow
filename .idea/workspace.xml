@@ -7,7 +7,7 @@
     <file path="/Dummy.txt" changelist="e83f2c1d-177c-473a-8507-c402d169807f" time="1362567487987" ignored="false" />
     <file path="$PROJECT_DIR$/../../aerogear/controller/aerogear-controller/pom.xml" changelist="e83f2c1d-177c-473a-8507-c402d169807f" time="1362567727705" ignored="false" />
     <file path="/pom.xml" changelist="e83f2c1d-177c-473a-8507-c402d169807f" time="1362573691406" ignored="false" />
-    <file path="/Server.java" changelist="e83f2c1d-177c-473a-8507-c402d169807f" time="1362575088948" ignored="false" />
+    <file path="/Server.java" changelist="e83f2c1d-177c-473a-8507-c402d169807f" time="1362583603196" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -78,10 +78,20 @@
       <file leaf-file-name="Server.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/org/abstractj/scarecrow/Server.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="18" column="16" selection-start="743" selection-end="743" vertical-scroll-proportion="0.26960784">
+            <state line="21" column="52" selection-start="715" selection-end="715" vertical-scroll-proportion="0.31862745">
               <folding>
-                <element signature="e#501#807#0" expanded="true" />
-                <element signature="e#796#797#0" expanded="true" />
+                <element signature="e#572#742#0" expanded="true" />
+                <element signature="e#731#732#0" expanded="true" />
+                <element signature="e#777#1101#0" expanded="true" />
+                <element signature="e#906#1075#0" expanded="true" />
+                <element signature="e#1056#1057#0" expanded="true" />
+                <element signature="e#1090#1091#0" expanded="true" />
+                <element signature="e#1138#1296#0" expanded="true" />
+                <element signature="e#1285#1286#0" expanded="true" />
+                <element signature="e#1332#1492#0" expanded="true" />
+                <element signature="e#1481#1482#0" expanded="true" />
+                <element signature="e#1544#1850#0" expanded="true" />
+                <element signature="e#1839#1840#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -437,13 +447,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="43" column="46" selection-start="1494" selection-end="1512" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/webapp/index.html">
       <provider selected="true" editor-type-id="text-editor">
         <state line="33" column="55" selection-start="1401" selection-end="1401" vertical-scroll-proportion="-15.916667">
@@ -451,12 +454,29 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="43" column="46" selection-start="1494" selection-end="1512" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/org/abstractj/scarecrow/Server.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="18" column="16" selection-start="743" selection-end="743" vertical-scroll-proportion="0.26960784">
+        <state line="21" column="52" selection-start="715" selection-end="715" vertical-scroll-proportion="0.31862745">
           <folding>
-            <element signature="e#501#807#0" expanded="true" />
-            <element signature="e#796#797#0" expanded="true" />
+            <element signature="e#572#742#0" expanded="true" />
+            <element signature="e#731#732#0" expanded="true" />
+            <element signature="e#777#1101#0" expanded="true" />
+            <element signature="e#906#1075#0" expanded="true" />
+            <element signature="e#1056#1057#0" expanded="true" />
+            <element signature="e#1090#1091#0" expanded="true" />
+            <element signature="e#1138#1296#0" expanded="true" />
+            <element signature="e#1285#1286#0" expanded="true" />
+            <element signature="e#1332#1492#0" expanded="true" />
+            <element signature="e#1481#1482#0" expanded="true" />
+            <element signature="e#1544#1850#0" expanded="true" />
+            <element signature="e#1839#1840#0" expanded="true" />
           </folding>
         </state>
       </provider>
