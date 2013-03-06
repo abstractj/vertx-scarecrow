@@ -31,6 +31,8 @@
 
     <properties>
         <aerogear.security.version>1.0.0.CR1</aerogear.security.version>
+        <!-- Define the version of PicketLink APIs we want to import -->
+        <picketlink.version>3.0.0.Alpha1</picketlink.version>
     </properties>
 
 
@@ -71,18 +73,49 @@
             <artifactId>vertx-lang-jruby</artifactId>
             <version>1.3.1.final</version>
         </dependency>
+        <!-- PicketLink -->
         <dependency>
-            <groupId>org.jboss.aerogear</groupId>
-            <artifactId>aerogear-security</artifactId>
-            <version>${aerogear.security.version}</version>
+            <groupId>org.picketlink</groupId>
+            <artifactId>picketlink-core-api</artifactId>
+            <version>${picketlink.version}</version>
             <scope>compile</scope>
         </dependency>
+
         <dependency>
-            <groupId>org.jboss.aerogear</groupId>
-            <artifactId>aerogear-security-picketlink</artifactId>
-            <version>${aerogear.security.version}</version>
+            <groupId>org.picketlink</groupId>
+            <artifactId>picketlink-core-impl</artifactId>
+            <version>${picketlink.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.picketlink</groupId>
+            <artifactId>picketlink-idm-api</artifactId>
+            <version>${picketlink.version}</version>
             <scope>compile</scope>
         </dependency>
+
+        <dependency>
+            <groupId>org.picketlink</groupId>
+            <artifactId>picketlink-idm-impl</artifactId>
+            <version>${picketlink.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.picketlink</groupId>
+            <artifactId>picketlink-idm-schema</artifactId>
+            <version>${picketlink.version}</version>
+        </dependency>
+
+        <!-- end -->
+
+        <!-- Import the JPA API, we use provided scope as the API is included
+      in JBoss -->
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>ejb3-persistence</artifactId>
+            <version>3.3.2.Beta1</version>
+        </dependency>
+
     </dependencies>
     
 </project>
