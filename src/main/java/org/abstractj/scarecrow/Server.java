@@ -1,6 +1,6 @@
 package org.abstractj.scarecrow;
 
-import org.jboss.aerogear.security.model.AeroGearUser;
+import org.abstractj.scarecrow.model.User;
 import org.vertx.java.core.Handler;
 import org.vertx.java.core.buffer.Buffer;
 import org.vertx.java.core.http.HttpServerRequest;
@@ -8,9 +8,16 @@ import org.vertx.java.core.http.RouteMatcher;
 import org.vertx.java.core.json.impl.Json;
 import org.vertx.java.deploy.Verticle;
 
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+
 public class Server extends Verticle {
 
     public void start() {
+
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("picketlink-default");
+        EntityManager em = emf.createEntityManager();
 
         RouteMatcher rm = new RouteMatcher();
 
@@ -24,7 +31,7 @@ public class Server extends Verticle {
             public void handle(final HttpServerRequest req) {
                 req.dataHandler(new Handler<Buffer>() {
                     public void handle(Buffer buffer) {
-                        AeroGearUser user = (AeroGearUser) Json.decodeValue(buffer.toString(), AeroGearUser.class);
+                        User user = (User) Json.decodeValue(buffer.toString(), User.class);
                         req.response.end(user.getUsername());
                     }
                 });
