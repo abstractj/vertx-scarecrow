@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>org.abstractj.scarecrow</groupId>
+    <artifactId>vertx-scarecrow</artifactId>
+    <version>0.1-SNAPSHOT</version>
+    <packaging>jar</packaging>
+
+    <name>vertx-scarecrow</name>
+    <url>http://github.com/abstractj/vertx-scarecrow</url>
+
+    <licenses>
+        <license>
+            <name>The Apache Software License, Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+
+    <developers>
+        <developer>
+            <id>abstractj</id>
+            <name>Bruno Oliveira</name>
+            <url>http://abstractj.org</url>
+            <email>bruno@abstractj.org</email>
+        </developer>
+    </developers>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>1.7</source>
+                    <target>1.7</target>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.anacoders.plugins</groupId>
+                <artifactId>vertx-maven-plugin</artifactId>
+                <version>1.2.3.4</version>
+                <configuration>
+                    <verticleName>org.abstractj.scarecrow.Server</verticleName>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.vert-x</groupId>
+            <artifactId>vertx-core</artifactId>
+            <version>1.3.1.final</version>
+        </dependency>
+        <dependency>
+            <groupId>org.vert-x</groupId>
+            <artifactId>vertx-lang-java</artifactId>
+            <version>1.3.1.final</version>
+        </dependency>
+        <dependency>
+            <groupId>org.vert-x</groupId>
+            <artifactId>vertx-lang-jruby</artifactId>
+            <version>1.3.1.final</version>
+        </dependency>
+
+    </dependencies>
+    
+</project>
