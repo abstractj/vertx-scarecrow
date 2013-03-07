@@ -8,16 +8,18 @@ import org.vertx.java.core.http.RouteMatcher;
 import org.vertx.java.core.json.impl.Json;
 import org.vertx.java.deploy.Verticle;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
+import java.io.InputStream;
+import java.net.URL;
 
 public class Server extends Verticle {
 
     public void start() {
 
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("picketlink-default");
-        EntityManager em = emf.createEntityManager();
+//        EntityManagerFactory emf = Persistence.createEntityManagerFactory("picketlink-default");
+//        EntityManager em = emf.createEntityManager();
+
+        InputStream persistence = getClass().getClassLoader().getResourceAsStream("src/main/resources/persistence.xml");
+        System.out.println(persistence);
 
         RouteMatcher rm = new RouteMatcher();
 

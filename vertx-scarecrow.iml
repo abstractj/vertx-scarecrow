@@ -1,5 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <module org.jetbrains.idea.maven.project.MavenProjectsManager.isMavenModule="true" type="JAVA_MODULE" version="4">
+  <component name="FacetManager">
+    <facet type="jpa" name="JPA">
+      <configuration>
+        <setting name="validation-enabled" value="true" />
+        <setting name="provider-name" value="" />
+        <datasource-mapping />
+        <deploymentDescriptor name="persistence.xml" url="file://$MODULE_DIR$/src/main/java/org/abstractj/scarecrow/META-INF/persistence.xml" />
+      </configuration>
+    </facet>
+  </component>
   <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_1_7" inherit-compiler-output="false">
     <output url="file://$MODULE_DIR$/target/classes" />
     <output-test url="file://$MODULE_DIR$/target/test-classes" />
@@ -11,6 +21,9 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" name="Maven: org.jboss.aerogear:aerogear-security:1.0.0.CR1" level="project" />
+    <orderEntry type="library" name="Maven: org.codehaus.jackson:jackson-jaxrs:1.9.2" level="project" />
+    <orderEntry type="library" name="Maven: org.jboss.aerogear:aerogear-security-picketlink:1.0.0.CR1" level="project" />
     <orderEntry type="library" name="Maven: org.vert-x:vertx-core:1.3.1.final" level="project" />
     <orderEntry type="library" name="Maven: org.slf4j:slf4j-api:1.6.2" level="project" />
     <orderEntry type="library" name="Maven: log4j:log4j:1.2.16" level="project" />
@@ -22,17 +35,15 @@
     <orderEntry type="library" name="Maven: org.vert-x:vertx-platform:1.3.1.final" level="project" />
     <orderEntry type="library" name="Maven: org.vert-x:vertx-lang-jruby:1.3.1.final" level="project" />
     <orderEntry type="library" name="Maven: org.jruby:jruby:1.7.2" level="project" />
-    <orderEntry type="library" name="Maven: org.jboss.aerogear:aerogear-security:1.0.0.CR1" level="project" />
-    <orderEntry type="library" name="Maven: org.codehaus.jackson:jackson-jaxrs:1.9.2" level="project" />
-    <orderEntry type="library" name="Maven: org.jboss.logging:jboss-logging:3.1.0.GA" level="project" />
-    <orderEntry type="library" name="Maven: commons-lang:commons-lang:2.6" level="project" />
-    <orderEntry type="library" name="Maven: org.jboss.aerogear:aerogear-security-picketlink:1.0.0.CR1" level="project" />
     <orderEntry type="library" name="Maven: org.picketlink:picketlink-core-api:3.0.0.Alpha1" level="project" />
     <orderEntry type="library" name="Maven: org.picketlink:picketlink-idm-api:3.0.0.Alpha1" level="project" />
     <orderEntry type="library" name="Maven: org.picketlink:picketlink-common:3.0.0.Alpha1" level="project" />
+    <orderEntry type="library" name="Maven: org.jboss.logging:jboss-logging:3.1.0.GA" level="project" />
     <orderEntry type="library" name="Maven: org.picketlink:picketlink-core-impl:3.0.0.Alpha1" level="project" />
     <orderEntry type="library" name="Maven: org.picketlink:picketlink-idm-impl:3.0.0.Alpha1" level="project" />
     <orderEntry type="library" name="Maven: org.picketlink:picketlink-idm-schema:3.0.0.Alpha1" level="project" />
+    <orderEntry type="library" name="Maven: commons-lang:commons-lang:2.6" level="project" />
+    <orderEntry type="library" name="Maven: org.hibernate:ejb3-persistence:3.3.2.Beta1" level="project" />
   </component>
 </module>
 
