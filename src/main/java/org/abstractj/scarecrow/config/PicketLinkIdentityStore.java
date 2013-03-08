@@ -1,6 +1,5 @@
 package org.abstractj.scarecrow.config;
 
-import org.picketlink.idm.IdentityManager;
 import org.picketlink.idm.config.FeatureSet;
 import org.picketlink.idm.config.IdentityStoreConfiguration;
 import org.picketlink.idm.jpa.internal.JPAIdentityStoreConfiguration;
@@ -15,13 +14,13 @@ import org.picketlink.idm.jpa.schema.RelationshipObjectAttribute;
 import org.picketlink.idm.model.Authorization;
 import org.picketlink.idm.model.Realm;
 
-public class PicketLink {
+public class PicketLinkIdentityStore {
 
-    public static IdentityStoreConfiguration getIdentityStoreConfiguration() {
+    public static IdentityStoreConfiguration configuration() {
         JPAIdentityStoreConfiguration configuration = new JPAIdentityStoreConfiguration();
 
         configuration.addRealm(Realm.DEFAULT_REALM);
-        configuration.addRealm("Default");
+        configuration.addRealm("Default Realm");
 
         configuration.setIdentityClass(IdentityObject.class);
         configuration.setAttributeClass(IdentityObjectAttribute.class);

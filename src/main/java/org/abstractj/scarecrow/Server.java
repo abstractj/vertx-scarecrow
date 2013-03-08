@@ -1,13 +1,10 @@
 package org.abstractj.scarecrow;
 
-import org.abstractj.scarecrow.config.Persistence;
-import org.abstractj.scarecrow.config.PicketLink;
+import org.abstractj.scarecrow.config.PicketLinkIdentityStore;
+import org.abstractj.scarecrow.util.PersistenceUtil;
 import org.abstractj.scarecrow.model.User;
-import org.picketlink.Identity;
-import org.picketlink.credential.DefaultLoginCredentials;
 import org.picketlink.idm.IdentityManager;
 import org.picketlink.idm.config.IdentityConfiguration;
-import org.picketlink.idm.credential.Credentials;
 import org.picketlink.idm.credential.Password;
 import org.picketlink.idm.credential.UsernamePasswordCredentials;
 import org.picketlink.idm.internal.DefaultIdentityManager;
@@ -15,7 +12,6 @@ import org.picketlink.idm.internal.DefaultIdentityStoreInvocationContextFactory;
 import org.picketlink.idm.model.Role;
 import org.picketlink.idm.model.SimpleRole;
 import org.picketlink.idm.model.SimpleUser;
-import org.picketlink.internal.DefaultIdentity;
 import org.vertx.java.core.Handler;
 import org.vertx.java.core.buffer.Buffer;
 import org.vertx.java.core.http.HttpServerRequest;
@@ -30,15 +26,15 @@ public class Server extends Verticle {
 
     public void start() {
 
-        EntityManagerFactory factory = Persistence.createEntityManagerFactory();
+        EntityManagerFactory factory = PersistenceUtil.getEntityManagerFactory();
         EntityManager entityManager = factory.createEntityManager();
 
         entityManager.getTransaction().begin();
 
-        //PicketLink
+        //PicketLinkIdentityStore
         IdentityManager identityManager = new DefaultIdentityManager();
         IdentityConfiguration config = new IdentityConfiguration();
-        config.addStoreConfiguration(PicketLink.getIdentityStoreConfiguration());
+        config.addStoreConfiguration(PicketLinkIdentityStore.configuration());
 
         DefaultIdentityStoreInvocationContextFactory icf = new DefaultIdentityStoreInvocationContextFactory(factory);
 
