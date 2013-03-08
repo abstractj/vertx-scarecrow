@@ -4,11 +4,13 @@ import org.hibernate.ejb.Ejb3Configuration;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.EntityTransaction;
 import java.util.Properties;
 
 public class PersistenceUtil {
 
     private static EntityManagerFactory entityManagerFactory = null;
+    private static EntityManager entityManager = null;
 
     static {
         try {
@@ -33,6 +35,22 @@ public class PersistenceUtil {
 
     public static EntityManagerFactory getEntityManagerFactory() {
         return entityManagerFactory;
+    }
+
+    public static EntityManager getEntityManager() {
+        entityManager = entityManagerFactory.createEntityManager();
+        return entityManager;
+    }
+
+    public static EntityTransaction getTransaction() {
+        return entityManager.getTransaction();
+    }
+
+    public void close() {
+        if (entityManager.isOpen() && !entityManager.getTransaction().isActive()) {
+            entityManager.close();
+            entityManagerFactory.close();
+        }
     }
 
     private static Properties configuration() {

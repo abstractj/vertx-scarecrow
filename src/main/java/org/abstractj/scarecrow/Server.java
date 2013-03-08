@@ -1,17 +1,7 @@
 package org.abstractj.scarecrow;
 
-import org.abstractj.scarecrow.config.PicketLinkIdentityStore;
-import org.abstractj.scarecrow.util.PersistenceUtil;
 import org.abstractj.scarecrow.model.User;
-import org.picketlink.idm.IdentityManager;
-import org.picketlink.idm.config.IdentityConfiguration;
-import org.picketlink.idm.credential.Password;
-import org.picketlink.idm.credential.UsernamePasswordCredentials;
-import org.picketlink.idm.internal.DefaultIdentityManager;
-import org.picketlink.idm.internal.DefaultIdentityStoreInvocationContextFactory;
-import org.picketlink.idm.model.Role;
-import org.picketlink.idm.model.SimpleRole;
-import org.picketlink.idm.model.SimpleUser;
+import org.abstractj.scarecrow.service.SecurityService;
 import org.vertx.java.core.Handler;
 import org.vertx.java.core.buffer.Buffer;
 import org.vertx.java.core.http.HttpServerRequest;
@@ -19,36 +9,15 @@ import org.vertx.java.core.http.RouteMatcher;
 import org.vertx.java.core.json.impl.Json;
 import org.vertx.java.deploy.Verticle;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-
 public class Server extends Verticle {
 
     public void start() {
 
-        EntityManagerFactory factory = PersistenceUtil.getEntityManagerFactory();
-        EntityManager entityManager = factory.createEntityManager();
+        SecurityService securityService = new SecurityService();
 
-        entityManager.getTransaction().begin();
+        securityService.create();
 
-        //PicketLinkIdentityStore
-        IdentityManager identityManager = new DefaultIdentityManager();
-        IdentityConfiguration config = new IdentityConfiguration();
-        config.addStoreConfiguration(PicketLinkIdentityStore.configuration());
-
-        DefaultIdentityStoreInvocationContextFactory icf = new DefaultIdentityStoreInvocationContextFactory(factory);
-
-        icf.setEntityManager(entityManager);
-        identityManager.bootstrap(config, icf);
-
-        create(identityManager);
-
-        login(identityManager);
-
-        entityManager.getTransaction().commit();
-        entityManager.close();
-        factory.close();
-
+        securityService.login();
 
         RouteMatcher rm = new RouteMatcher();
 
@@ -91,42 +60,4 @@ public class Server extends Verticle {
         }).requestHandler(rm).listen(8080);
 
     }
-
-
-    private void login(IdentityManager identityManager){
-
-        UsernamePasswordCredentials credential = new UsernamePasswordCredentials();
-        credential.setUsername("john");
-        credential.setPassword(new Password("123"));
-
-        identityManager.validateCredentials(credential);
-
-        System.out.println("Logged in? " + credential.getStatus());
-
-    }
-    private void create(IdentityManager identityManager){
-        org.picketlink.idm.model.User user = new SimpleUser("john");
-
-        user.setEmail("john@doe.com");
-        user.setFirstName("John");
-        user.setLastName("Doe");
-
-        /*
-         * Note: Password will be encoded in SHA-512 with SecureRandom-1024 salt
-         * See http://lists.jboss.org/pipermail/security-dev/2013-January/000650.html for more information
-         */
-        identityManager.add(user);
-        identityManager.updateCredential(user, new Password("123"));
-
-        Role roleDeveloper = new SimpleRole("simple");
-        Role roleAdmin = new SimpleRole("admin");
-
-        identityManager.add(roleDeveloper);
-        identityManager.add(roleAdmin);
-
-        identityManager.grantRole(user, roleDeveloper);
-        identityManager.grantRole(user, roleAdmin);
-    }
-
-
 }
