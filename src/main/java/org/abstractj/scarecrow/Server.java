@@ -13,11 +13,9 @@ public class Server extends Verticle {
 
     public void start() {
 
-        SecurityService securityService = new SecurityService();
+        final SecurityService securityService = new SecurityService();
 
-        securityService.create();
-
-        securityService.login();
+        securityService.init();
 
         RouteMatcher rm = new RouteMatcher();
 
@@ -32,6 +30,7 @@ public class Server extends Verticle {
                 req.dataHandler(new Handler<Buffer>() {
                     public void handle(Buffer buffer) {
                         User user = (User) Json.decodeValue(buffer.toString(), User.class);
+                        securityService.login(user);
                         req.response.end(user.getUsername());
                     }
                 });
@@ -46,8 +45,14 @@ public class Server extends Verticle {
         });
 
         rm.post("/auth/enroll", new Handler<HttpServerRequest>() {
-            public void handle(HttpServerRequest req) {
-                req.response.end("Register");
+            public void handle(final HttpServerRequest req) {
+                req.dataHandler(new Handler<Buffer>() {
+                    public void handle(Buffer buffer) {
+                        User user = (User) Json.decodeValue(buffer.toString(), User.class);
+                        securityService.create(user);
+                        req.response.end(user.getUsername());
+                    }
+                });
             }
         });
 

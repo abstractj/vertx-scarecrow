@@ -43,10 +43,14 @@ public class PersistenceUtil {
     }
 
     public static EntityTransaction getTransaction() {
-        return entityManager.getTransaction();
+        EntityTransaction transaction = entityManager.getTransaction();
+        if(!transaction.isActive())
+            transaction.begin();
+
+        return transaction;
     }
 
-    public void close() {
+    public static void close() {
         if (entityManager.isOpen() && !entityManager.getTransaction().isActive()) {
             entityManager.close();
             entityManagerFactory.close();

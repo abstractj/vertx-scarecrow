@@ -1,6 +1,7 @@
 package org.abstractj.scarecrow.service;
 
 import org.abstractj.scarecrow.config.IdentityManagerFactory;
+import org.abstractj.scarecrow.model.User;
 import org.picketlink.authentication.Authenticator;
 import org.picketlink.idm.IdentityManager;
 import org.picketlink.idm.credential.Credentials;
@@ -23,13 +24,23 @@ public class SecurityService {
         identityManager = factory.create();
     }
 
-    public void login() {
+    public void init() {
+        getTransaction();
+        Role roleDeveloper = new SimpleRole("simple");
+        Role roleAdmin = new SimpleRole("admin");
+
+        identityManager.add(roleDeveloper);
+        identityManager.add(roleAdmin);
+        getTransaction().commit();
+    }
+
+    public void login(User user) {
 
         UsernamePasswordCredentials credential = new UsernamePasswordCredentials();
-        credential.setUsername("john");
-        credential.setPassword(new Password("123"));
+        credential.setUsername(user.getUsername());
+        credential.setPassword(new Password(user.getPassword()));
 
-        getTransaction().begin();
+        getTransaction();
         identityManager.validateCredentials(credential);
         getTransaction().commit();
 
@@ -38,27 +49,24 @@ public class SecurityService {
 
     }
 
-    public void create() {
+    public void create(User newUser) {
 
-        org.picketlink.idm.model.User user = new SimpleUser("john");
+        org.picketlink.idm.model.User user = new SimpleUser(newUser.getUsername());
 
-        user.setEmail("john@doe.com");
-        user.setFirstName("John");
-        user.setLastName("Doe");
+//        user.setEmail("john@doe.com");
+//        user.setFirstName("John");
+//        user.setLastName("Doe");
 
         /*
          * Note: Password will be encoded in SHA-512 with SecureRandom-1024 salt
          * See http://lists.jboss.org/pipermail/security-dev/2013-January/000650.html for more information
          */
-        getTransaction().begin();
+        getTransaction();
         identityManager.add(user);
-        identityManager.updateCredential(user, new Password("123"));
+        identityManager.updateCredential(user, new Password(newUser.getPassword()));
 
-        Role roleDeveloper = new SimpleRole("simple");
-        Role roleAdmin = new SimpleRole("admin");
-
-        identityManager.add(roleDeveloper);
-        identityManager.add(roleAdmin);
+        Role roleDeveloper = identityManager.getRole("simple");
+        Role roleAdmin = identityManager.getRole("admin");
 
         identityManager.grantRole(user, roleDeveloper);
         identityManager.grantRole(user, roleAdmin);
