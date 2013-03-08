@@ -74,6 +74,18 @@ public class Server extends Verticle {
             }
         });
 
+        // static files:
+        rm.getWithRegEx(".*", new Handler<HttpServerRequest>() {
+            public void handle(final HttpServerRequest req) {
+                if (req.uri.matches("/")) {
+                    req.response.sendFile("webapp/index.html");
+                } else {
+                    // meh...
+                    req.response.sendFile("webapp/" + req.path);
+                }
+            }
+        });
+
         vertx.createHttpServer().requestHandler(new Handler<HttpServerRequest>() {
             public void handle(HttpServerRequest req) {
                 final String appName = "/scarecrow";
