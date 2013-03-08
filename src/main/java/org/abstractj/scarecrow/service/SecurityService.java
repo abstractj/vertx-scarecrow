@@ -2,7 +2,6 @@ package org.abstractj.scarecrow.service;
 
 import org.abstractj.scarecrow.config.IdentityManagerFactory;
 import org.abstractj.scarecrow.model.User;
-import org.picketlink.authentication.Authenticator;
 import org.picketlink.idm.IdentityManager;
 import org.picketlink.idm.credential.Credentials;
 import org.picketlink.idm.credential.Password;
@@ -11,16 +10,15 @@ import org.picketlink.idm.model.Role;
 import org.picketlink.idm.model.SimpleRole;
 import org.picketlink.idm.model.SimpleUser;
 
-import static org.abstractj.scarecrow.util.PersistenceUtil.*;
+import static org.abstractj.scarecrow.util.PersistenceUtil.getTransaction;
 
 public class SecurityService {
 
 
-    private final IdentityManagerFactory factory;
     private final IdentityManager identityManager;
 
     public SecurityService() {
-        factory = new IdentityManagerFactory();
+        IdentityManagerFactory factory = new IdentityManagerFactory();
         identityManager = factory.create();
     }
 
