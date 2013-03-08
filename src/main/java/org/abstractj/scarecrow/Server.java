@@ -1,5 +1,6 @@
 package org.abstractj.scarecrow;
 
+import org.abstractj.scarecrow.config.Persistence;
 import org.abstractj.scarecrow.model.User;
 import org.vertx.java.core.Handler;
 import org.vertx.java.core.buffer.Buffer;
@@ -8,18 +9,11 @@ import org.vertx.java.core.http.RouteMatcher;
 import org.vertx.java.core.json.impl.Json;
 import org.vertx.java.deploy.Verticle;
 
-import java.io.InputStream;
-import java.net.URL;
-
 public class Server extends Verticle {
 
     public void start() {
 
-//        EntityManagerFactory emf = Persistence.createEntityManagerFactory("picketlink-default");
-//        EntityManager em = emf.createEntityManager();
-
-        InputStream persistence = getClass().getClassLoader().getResourceAsStream("src/main/resources/persistence.xml");
-        System.out.println(persistence);
+        Persistence.createEntityManager();
 
         RouteMatcher rm = new RouteMatcher();
 
@@ -62,4 +56,6 @@ public class Server extends Verticle {
         }).requestHandler(rm).listen(8080);
 
     }
+
+
 }
