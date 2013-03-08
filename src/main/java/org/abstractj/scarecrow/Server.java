@@ -9,6 +9,7 @@ import org.picketlink.idm.IdentityManager;
 import org.picketlink.idm.config.IdentityConfiguration;
 import org.picketlink.idm.credential.Credentials;
 import org.picketlink.idm.credential.Password;
+import org.picketlink.idm.credential.UsernamePasswordCredentials;
 import org.picketlink.idm.internal.DefaultIdentityManager;
 import org.picketlink.idm.internal.DefaultIdentityStoreInvocationContextFactory;
 import org.picketlink.idm.model.Role;
@@ -46,11 +47,12 @@ public class Server extends Verticle {
 
         create(identityManager);
 
+        login(identityManager);
+
         entityManager.getTransaction().commit();
         entityManager.close();
         factory.close();
 
-        login();
 
         RouteMatcher rm = new RouteMatcher();
 
@@ -95,17 +97,16 @@ public class Server extends Verticle {
     }
 
 
-    private void login(){
+    private void login(IdentityManager identityManager){
 
-        DefaultLoginCredentials credential = new DefaultLoginCredentials();
-        credential.setUserId("john");
-        credential.setCredential(new Password("123"));
+        UsernamePasswordCredentials credential = new UsernamePasswordCredentials();
+        credential.setUsername("john");
+        credential.setPassword(new Password("123"));
 
-        Identity identity = new DefaultIdentity();
+        identityManager.validateCredentials(credential);
 
-        if (identity.login() != Identity.AuthenticationResult.SUCCESS) {
-            throw new RuntimeException("Login failed");
-        }
+        System.out.println("Logged in? " + credential.getStatus());
+
     }
     private void create(IdentityManager identityManager){
         org.picketlink.idm.model.User user = new SimpleUser("john");
