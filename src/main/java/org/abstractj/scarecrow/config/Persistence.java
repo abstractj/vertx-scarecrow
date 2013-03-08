@@ -8,17 +8,7 @@ import java.util.Properties;
 public class Persistence {
 
     public static EntityManagerFactory createEntityManagerFactory() {
-        Properties properties = new Properties();
-        properties.put("javax.persistence.provider", "org.hibernate.ejb.HibernatePersistence");
-        properties.put("javax.persistence.transactionType", "RESOURCE_LOCAL");
-        properties.put("hibernate.connection.username", "sa");
-        properties.put("hibernate.connection.password", "");
-        properties.put("hibernate.connection.driver_class", "org.hsqldb.jdbcDriver");
-        properties.put("hibernate.connection.url", "jdbc:hsqldb:.");
-        properties.put("hibernate.dialect", "org.hibernate.dialect.HSQLDialect");
-        properties.put("hibernate.hbm2ddl.auto", "create-drop");
-        properties.put("hibernate.show_sql", "true");
-        properties.put("hibernate.format_sql", "true");
+        Properties properties = configuration();
         //
         Ejb3Configuration cfg = new Ejb3Configuration();
         cfg.addProperties(properties);
@@ -32,5 +22,20 @@ public class Persistence {
         cfg.addAnnotatedClass(org.picketlink.idm.jpa.schema.CredentialObjectAttribute.class);
 
         return cfg.buildEntityManagerFactory();
+    }
+
+    private static Properties configuration() {
+        Properties properties = new Properties();
+        properties.put("javax.persistence.provider", "org.hibernate.ejb.HibernatePersistence");
+        properties.put("javax.persistence.transactionType", "RESOURCE_LOCAL");
+        properties.put("hibernate.connection.username", "sa");
+        properties.put("hibernate.connection.password", "");
+        properties.put("hibernate.connection.driver_class", "org.hsqldb.jdbcDriver");
+        properties.put("hibernate.connection.url", "jdbc:hsqldb:.");
+        properties.put("hibernate.dialect", "org.hibernate.dialect.HSQLDialect");
+        properties.put("hibernate.hbm2ddl.auto", "create-drop");
+        properties.put("hibernate.show_sql", "true");
+        properties.put("hibernate.format_sql", "true");
+        return properties;
     }
 }
